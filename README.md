@@ -1,4 +1,4 @@
-# Proyecto Casa Domotica
+# Proyecto Casa Domótica
 <strong>Desarrollado en Arduino y Simulado en Proteus</strong>
 
 Este proyecto se divide en 3 SubSistemas:
