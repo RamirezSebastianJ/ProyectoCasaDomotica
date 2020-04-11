@@ -15,7 +15,7 @@ Este proyecto se divide en 3 SubSistemas:
   <br>                                     
   </ol>
 
-<em>Este proyecto se ha desarrollado para La Asignatura de Laboratorio de Electrónica de la Universidad Técnologica De Pereira</em>
+<em>Este proyecto se ha desarrollado para La Asignatura de Laboratorio de Electrónica del programa de Ingeniería de Sistemas y Computación de la Universidad Técnologica De Pereira</em>
 
  
 
