@@ -6,6 +6,11 @@
 
 Servo myservo;
 
+//bluetooth hc-05
+//int ledPin = 13; // usamos un pin de salida al LED
+int state = 0;   // Variable lectrura dato serial
+
+
 //Constantes para la pantalal LCD
 const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
@@ -169,6 +174,22 @@ void loop() {
   }else{                                      //No Hay Detección e Movimiento
     digitalWrite(outDigital, LOW);            //Apagar el Led
     Cerrar();                                 //Cerrar el la Cerradurra. (SERVO --> 180° a 0°)
+  }
+
+  
+  if(Serial.available() > 0){
+       state = Serial.read();
+  } 
+       
+      
+  if (state == 'E') {
+     digitalWrite(outDigital, HIGH);
+     state = 0;
+  }
+      
+  if (state == 'A'){
+    digitalWrite(outDigital, LOW);
+    state = 0;
   }
   
 }
