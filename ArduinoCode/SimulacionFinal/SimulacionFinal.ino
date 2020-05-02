@@ -62,6 +62,8 @@ void setup() {
   // declarar el pin de conexion 13 del led como salida
   pinMode(outDigital, OUTPUT);
 
+  pinMode(22, OUTPUT);
+  
   //declarar el Pin de conexion 11 del Rele como una Entrada
   pinMode(rele, OUTPUT);
   
