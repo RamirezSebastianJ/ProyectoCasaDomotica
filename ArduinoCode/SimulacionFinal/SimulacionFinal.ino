@@ -8,7 +8,7 @@ Servo myservo;
 
 //bluetooth hc-05
 //int ledPin = 13; // usamos un pin de salida al LED
-int state = 0;   // Variable lectrura dato serial
+int state = 0;   // Variable lectura dato serial
 
 
 
@@ -171,12 +171,12 @@ void loop() {
        
       
   if (state == 'E') {
-     digitalWrite(outDigital, HIGH);
+     digitalWrite(22, HIGH);
      state = 0;
   }
       
   if (state == 'A'){
-    digitalWrite(outDigital, LOW);
+    digitalWrite(22, LOW);
     state = 0;
   }
   
