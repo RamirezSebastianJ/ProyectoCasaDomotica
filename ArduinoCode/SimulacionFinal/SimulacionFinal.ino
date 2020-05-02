@@ -6,6 +6,12 @@
 
 Servo myservo;
 
+//bluetooth hc-05
+//int ledPin = 13; // usamos un pin de salida al LED
+int state = 0;   // Variable lectrura dato serial
+
+
+
 //Constantes para la pantalal LCD
 const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
@@ -159,6 +165,21 @@ void loop() {
   
   ControlDeCorriente(); //Inciar el control de corrinte por medio del Relé
 
+   if(Serial.available() > 0){
+       state = Serial.read();
+  } 
+       
+      
+  if (state == 'E') {
+     digitalWrite(outDigital, HIGH);
+     state = 0;
+  }
+      
+  if (state == 'A'){
+    digitalWrite(outDigital, LOW);
+    state = 0;
+  }
+  
   
   lecturaSensorPir = digitalRead(sensorPin);  //Tomar Datos del Sensor PIR
   
