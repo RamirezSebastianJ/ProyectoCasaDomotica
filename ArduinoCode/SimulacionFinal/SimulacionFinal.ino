@@ -6,13 +6,7 @@
 
 Servo myservo;
 
-//bluetooth hc-05
-//int ledPin = 13; // usamos un pin de salida al LED
-int state = 0;   // Variable lectura dato serial
-
-
-
-//Constantes para la pantalal LCD
+//Constantes para la pantalla LCD
 const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
@@ -28,8 +22,8 @@ int flag_clave_incorrecta=0;
 int flag_clave_correcta=0;
 
 //Constantes Para Keypad
-const byte ROWS = 4; //four rows
-const byte COLS = 3; //four columns
+const byte ROWS = 4; //para filas
+const byte COLS = 3; //para columnas
 char clave[]={'2','4','6'};
 char ingreso[3];
 
@@ -54,7 +48,7 @@ int pos = 0;    // variable para controlar la posicion del Servomotor
 void setup() {
 
   myservo.attach(servoPin);  // une el servo en el pin 9 al objeto servo
-  myservo.write(0);          //indicca al servomotor cual es su posicion inicial
+  myservo.write(0);          //indica al servomotor cual es su posicion inicial
 
   
   lcd.begin(16, 2); // Configura el numero de filas y columnas que tendrá la pantalla LCD
@@ -62,8 +56,6 @@ void setup() {
   // declarar el pin de conexion 13 del led como salida
   pinMode(outDigital, OUTPUT);
 
-  pinMode(22, OUTPUT);
-  
   //declarar el Pin de conexion 11 del Rele como una Entrada
   pinMode(rele, OUTPUT);
   
@@ -167,21 +159,6 @@ void loop() {
   
   ControlDeCorriente(); //Inciar el control de corrinte por medio del Relé
 
-   if(Serial.available() > 0){
-       state = Serial.read();
-  } 
-       
-      
-  if (state == 'E') {
-     digitalWrite(22, HIGH);
-     state = 0;
-  }
-      
-  if (state == 'A'){
-    digitalWrite(22, LOW);
-    state = 0;
-  }
-  
   
   lecturaSensorPir = digitalRead(sensorPin);  //Tomar Datos del Sensor PIR
   
