@@ -1,4 +1,3 @@
-
 #include <LiquidCrystal.h>
 #include <Servo.h>
 #include <Keypad.h>
@@ -11,10 +10,18 @@ const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 
+
+int Enviados[] = {0,0}; //Hacemos un arreglo para los datos a enviar
 int outDigital = 13;//Para trabajar sobre el led
 int sensorPin = 12; //Recibe Datos del Sensor PIR
 int rele = 11; //Control de Relé
 int servoPin = 10; //Para Controlar el Servomotor
+
+char entrada; //Declaramos una variables para los datos de entrada
+
+
+int periodo = 500; //El tiempo que se demora en enviar un nuevo dato a la aplicacion
+unsigned long TiempoAhora = 0; //Variable para determinar el tiempo transcurrido
 
 //Variables Para Keypad
 int i=0;
@@ -61,6 +68,7 @@ void setup() {
   
   // declarar el Pin de conexion 12 del sensor Pir como una Entrda
   pinMode(sensorPin, INPUT);
+  
   Serial.begin(9600); //Inicia la comunicacion serial con la computadora con una velocidad de 9600 bits
 
   //Utilizamos un for para calibrar el sensor 
@@ -157,7 +165,7 @@ void AbrirCerradura(){
 
 void loop() {
   
-  ControlDeCorriente(); //Inciar el control de corrinte por medio del Relé
+  //ControlDeCorriente(); //Inciar el control de corrinte por medio del Relé
 
   
   lecturaSensorPir = digitalRead(sensorPin);  //Tomar Datos del Sensor PIR
@@ -170,5 +178,27 @@ void loop() {
     digitalWrite(outDigital, LOW);            //Apagar el Led
     Cerrar();                                 //Cerrar el la Cerradurra. (SERVO --> 180° a 0°)
   }
+
+
+if (Serial.available()>0){ //Si hay datos enviados por la aplicacion
+    entrada=Serial.read(); //Leemos los datos recibidos
+    
+
+    if(entrada=='A') {  //Si el dato recibido es B, se apaga el led
+      digitalWrite(outDigital, HIGH);
+      digitalWrite(rele, HIGH);
+      Enviados[0] = 1;  //Modificamos en el la posicion 1 del arreglo el estado del led con 0 o 1
+    }
+    
+    if(entrada=='B') {  //Si el dato recibido es B, se apaga el led
+      digitalWrite(outDigital, LOW);
+      digitalWrite(rele, LOW);
+      Enviados[0] = 0;  //Modificamos en el la posicion 0 del arreglo el estado del led con 0 o 1
+      
+    }
+  }
+  
+  
+ 
   
 }
