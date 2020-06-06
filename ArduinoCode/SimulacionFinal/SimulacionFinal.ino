@@ -13,6 +13,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 int Enviados[] = {0,0}; //Hacemos un arreglo para los datos a enviar
 int outDigital = 13;//Para trabajar sobre el led
+int led = 9;
 int sensorPin = 12; //Recibe Datos del Sensor PIR
 int rele = 11; //Control de Relé
 int servoPin = 10; //Para Controlar el Servomotor
@@ -62,7 +63,7 @@ void setup() {
   
   // declarar el pin de conexion 13 del led como salida
   pinMode(outDigital, OUTPUT);
-
+  pinMode(led, OUTPUT);
   //declarar el Pin de conexion 11 del Rele como una Entrada
   pinMode(rele, OUTPUT);
   
@@ -184,18 +185,29 @@ if (Serial.available()>0){ //Si hay datos enviados por la aplicacion
     entrada=Serial.read(); //Leemos los datos recibidos
     
 
-    if(entrada=='A') {  //Si el dato recibido es B, se apaga el led
-      digitalWrite(outDigital, HIGH);
+    if(entrada=='A') {  //Si el dato recibido es B, se activa el relé
       digitalWrite(rele, HIGH);
       Enviados[0] = 1;  //Modificamos en el la posicion 1 del arreglo el estado del led con 0 o 1
     }
     
-    if(entrada=='B') {  //Si el dato recibido es B, se apaga el led
-      digitalWrite(outDigital, LOW);
+    if(entrada=='B') {  //Si el dato recibido es B, se apaga el relé
       digitalWrite(rele, LOW);
       Enviados[0] = 0;  //Modificamos en el la posicion 0 del arreglo el estado del led con 0 o 1
       
     }
+
+    if(entrada=='C') {  //Si el dato recibido es C, se enciende el led
+      digitalWrite(led, HIGH);
+      Enviados[0] = 1;  //Modificamos en el la posicion 0 del arreglo el estado del led con 0 o 1
+      
+    }
+
+    if(entrada=='D') {  //Si el dato recibido es D, se apaga el led
+      digitalWrite(rele, LOW);
+      Enviados[0] = 0;  //Modificamos en el la posicion 0 del arreglo el estado del led con 0 o 1
+      
+    }
+    
   }
   
   
