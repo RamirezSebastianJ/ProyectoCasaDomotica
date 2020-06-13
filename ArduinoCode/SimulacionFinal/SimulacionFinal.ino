@@ -203,7 +203,7 @@ if (Serial.available()>0){ //Si hay datos enviados por la aplicacion
     }
 
     if(entrada=='D') {  //Si el dato recibido es D, se apaga el led
-      digitalWrite(rele, LOW);
+      digitalWrite(led, LOW);
       Enviados[0] = 0;  //Modificamos en el la posicion 0 del arreglo el estado del led con 0 o 1
       
     }
